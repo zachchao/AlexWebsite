@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% include 'header.html' %}
+</head>
+<body>
+
+<style> 
+  {% include 'css/staple.css' %}
+
+  #firstParallax{
+    /* The image used */
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('static/IMG_0769.JPG');
+    /* Set a specific height */
+    height: 110%;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  #secondParallax{
+    /* The image used */
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('static/IMG_0784.JPG');
+    /* Set a specific height */
+    height: 100%;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  .headingText{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 60px;
+    color: white;
+    font-weight: 575;
+    text-align: center;
+    width: 100%;
+  }
+
+  .quoteText{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+    color: white;
+    font-weight: 375;
+    text-align: center;
+    width: 100%;
+  }
+
+  .image{
+    height: 300px; 
+    width: 400px; 
+    overflow: hidden;
+    border-radius: 5px;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
+
+  .gridImage{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    filter: grayscale(50%);
+  }
+
+  .row{
+    width: 100%;
+  }
+
+  .gridImage:hover{
+    transform: scale(1.2);
+    z-index: 100;
+    filter: initial;
+  }
+</style>
+
+<div id="main-container" style="height: 100%;">
+  <div id="firstParallax">
+    {% include 'navbar.html' %}
+    <div id="introContainer" style="padding: 15px; width: 100%;">
+      <div id="introText" class="row">
+        <h1 class="headingText">Alex Chao</h1>
+        <h1 class="headingText" style="font-size: 27px; margin-bottom: 50px;">Average surgeon, good father, white washed asian, try hard dog trainer, terrible poker player and future ring head.</h1>
+      </div>
+
+      {% for row in quoteData | batch(2) %}
+        <div class="row" style="margin-top: 35px;">
+          {% for item in row %}
+            <div class="col-5">
+              <h1 class="quoteText">{{item.quote}}<br>{{item.rating}}</h1>
+            </div>
+            <div class="col-2">
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div id="secondParallax">
+      {% for row in images | batch(3) %}
+      <div class="row" style="height: 33%; margin-left: 0px;">
+        {% for image in row %}
+        <div class="col-4 gridImage" style="background-image: url('static/{{image}}')">
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div><!--#main-container -->
+</body>
+</html>
+
